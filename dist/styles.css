@@ -1252,6 +1252,13 @@ dialog::backdrop {
   gap: 4px;
 }
 .type-toggle label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  min-height: 44px;
+  line-height: 20px;
   flex: 1;
   text-align: center;
   font-size: 11px;
@@ -1264,8 +1271,11 @@ dialog::backdrop {
   box-shadow: 0 2px 3px #183f3510;
 }
 .type-toggle input {
-  width: auto;
-  margin: 0 6px 0 0;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0;
   accent-color: var(--green);
 }
 #toast {
@@ -1288,6 +1298,7 @@ dialog::backdrop {
 }
 .scan-drop {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   justify-items: center;
   padding: 30px 20px;
@@ -1297,10 +1308,31 @@ dialog::backdrop {
   margin: 20px 0;
   font-size: 12px;
 }
+.scan-drop > * {
+  min-width: 0;
+  max-width: 100%;
+}
+.scan-drop > .muted {
+  text-align: center;
+  line-height: 1.6;
+}
 .scan-drop input {
+  width: 100%;
+  min-width: 0;
+  padding: 8px;
   border: none;
   font-size: 11px;
   max-width: 100%;
+}
+.scan-drop input::file-selector-button {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: white;
+  color: var(--green);
+  padding: 9px 10px;
+  margin-right: 8px;
+  font: inherit;
+  cursor: pointer;
 }
 .scan-preview {
   max-width: 100%;
