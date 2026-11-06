@@ -1,3 +1,4 @@
+import { renderLanding } from "./landing.js";
 import { createClient, createWorker } from "./vendor.js";
 import { config } from "./config.js";
 import {
@@ -189,74 +190,7 @@ function sampleRows() {
 }
 
 function landing() {
-  app.innerHTML = `<div class="section-wrap"><header class="public-nav">${brand()}<nav class="navlinks"><a href="#fitur">Fitur MAPAN</a><a href="#cara-kerja">Cara kerja</a><button class="link-btn" data-demo>Lihat contoh ${icon("arrow")}</button></nav><div class="nav-actions"><a class="btn ghost" href="#masuk">Masuk</a><a class="btn" href="#daftar">Mulai sekarang ${icon("arrow")}</a></div></header><main><section class="hero"><div><h1>Kuliah jalan.<br>Keuangan<br><em>tetap aman.</em></h1><p>Uang saku bukan cuma soal cukup sampai akhir bulan. Kenali kebiasaanmu, atur pengeluaran, dan mulai jadi mahasiswa yang mapan.</p><div class="hero-actions"><a href="#daftar" class="btn">Mulai perjalananmu ${icon("arrow")}</a><button class="btn secondary" data-demo>Lihat contoh</button></div><div class="quiet-list"><span>${icon("check")} Tanpa biaya berlangganan</span><span>${icon("check")} Nggak harus jago keuangan</span></div></div><div class="hero-art"><div class="mock"><div class="mock-top"><b>Dompet mahasiswa</b><span class="muted">Contoh tampilan</span></div><div class="mock-balance"><small>Saldo tersedia</small><strong>Rp2.008.000</strong><div class="mock-pair"><span>↙ Pemasukan<b>Rp2.850.000</b></span><span>↗ Pengeluaran<b>Rp842.000</b></span></div></div><h4>Sedikit demi sedikit, jadi paham.</h4><div class="mini-bars">${[32, 65, 48, 80, 55, 95, 65].map((n) => `<i style="height:${n}%"></i>`).join("")}</div><div class="mock-foot"><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span></div></div><div class="art-note"><span class="note-icon">${icon("check")}</span><span><strong>Lebih sadar, lebih terarah.</strong>Mulai dari satu catatan hari ini.</span></div><span class="hero-caption">CATAT. PAHAMI. TUMBUH.</span></div></section><div class="features-strip"><div>${icon("wallet")}<span><strong>Satu tempat untuk uangmu</strong><small>Saldo dan transaksi selalu terhubung.</small></span></div><div>${icon("scan")}<span><strong>Struk nggak cuma jadi sampah</strong><small>Foto, periksa, lalu simpan transaksinya.</small></span></div><div>${icon("bulb")}<span><strong>Belajar dari keseharian</strong><small>Insight dari kebiasaanmu sendiri.</small></span></div></div><section class="section" id="fitur"><div class="section-heading"><div><span class="eyebrow muted">Dibuat untuk kehidupan mahasiswa</span><h2>Urus keuangan.<br>Tanpa bikin tambah pikiran.</h2></div><p>Dari uang saku, bayar kos, sampai jajan di kantin. Semuanya punya tempat di MAPAN.</p></div><div class="feature-grid">${[
-    [
-      "01",
-      "wallet",
-      "Catatan yang jelas",
-      "Catat pemasukan dan pengeluaran. Lihat saldo terkini tanpa harus hitung ulang.",
-    ],
-    [
-      "02",
-      "scan",
-      "Foto struk, jadi catatan",
-      "Baca total dan tanggal dari struk. Kamu tetap memeriksa hasilnya sebelum disimpan.",
-    ],
-    [
-      "03",
-      "chart",
-      "Pola yang mulai kelihatan",
-      "Grafik dan ringkasan mingguan membantu kamu memahami ke mana uangmu pergi.",
-    ],
-    [
-      "04",
-      "book",
-      "Belajar yang relevan",
-      "Materi singkat dan refleksi berdasarkan kategori pengeluaranmu.",
-    ],
-    [
-      "05",
-      "report",
-      "Anggaran yang masuk akal",
-      "Tentukan batas bulanan per kategori, lalu pantau penggunaannya.",
-    ],
-    [
-      "06",
-      "shield",
-      "Ruang pribadi untuk uangmu",
-      "Login email dan akses data per akun. Struk diproses di perangkatmu.",
-    ],
-  ]
-    .map(
-      ([n, i, t, d]) =>
-        `<article class="feature"><div class="feature-num"><span>${n} / MAPAN</span>${icon(i)}</div><h3>${t}</h3><p>${d}</p></article>`,
-    )
-    .join(
-      "",
-    )}</div></section><section class="section how" id="cara-kerja"><div><span class="eyebrow muted">Mulainya sederhana</span><h2>Nggak perlu sempurna.<br>Mulai aja dulu.</h2></div><div class="steps">${[
-    [
-      "01",
-      "Bikin ruang keuanganmu",
-      "Daftar dengan email, verifikasi akun, lalu masuk ke dashboard pribadimu.",
-    ],
-    [
-      "02",
-      "Catat yang masuk dan keluar",
-      "Isi manual atau gunakan scan struk. Cukup beberapa langkah setiap hari.",
-    ],
-    [
-      "03",
-      "Luangkan waktu untuk refleksi",
-      "Baca laporan mingguan dan temukan satu kebiasaan kecil yang bisa diperbaiki.",
-    ],
-  ]
-    .map(
-      ([n, t, d]) =>
-        `<div class="step"><b>${n}</b><div><h3>${t}</h3><p>${d}</p></div></div>`,
-    )
-    .join(
-      "",
-    )}</div></section><section class="cta"><div><h2>Masa depan yang mapan,<br>dimulai dari hari ini.</h2><p>Satu catatan kecil. Satu langkah lebih paham.</p></div><a class="btn lime" href="#daftar">Buat akun MAPAN ${icon("arrow")}</a></section></main><footer>${brand()}<span>© ${new Date().getFullYear()} MAPAN · Mahasiswa Paham Keuangan</span><button class="link-btn" data-privacy>Privasi & data</button></footer></div>`;
+  app.innerHTML = renderLanding(brand, icon);
   bindCommon();
 }
 
@@ -970,7 +904,7 @@ function bindCommon() {
 
 function route() {
   const hash = location.hash.slice(1).split("?")[0];
-  if (["fitur", "cara-kerja"].includes(hash)) {
+  if (["fitur", "cara-kerja", "faq"].includes(hash)) {
     landing();
     requestAnimationFrame(() =>
       document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" }),
