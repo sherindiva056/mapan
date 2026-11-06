@@ -146,12 +146,15 @@
   font-size: 23px;
 }
 .mk-pocket {
+  display: grid;
+  align-content: start;
+  gap: 10px;
   position: absolute;
   left: -18px;
   right: auto;
   top: 24px;
   width: 112px;
-  height: 155px;
+  height: auto;
   padding: 15px;
   background: #184a3e;
   color: #d7f56d;
@@ -160,11 +163,13 @@
   box-shadow: 0 12px 24px #2845361a;
 }
 .mk-pocket > span {
+  display: block;
+  line-height: 1.5;
   font-size: 7px;
   letter-spacing: 1px;
 }
 .mk-pocket-chip {
-  margin: 16px 0 13px;
+  margin: 0;
   background: #d7f56d;
   border-radius: 8px;
   display: grid;
@@ -174,15 +179,17 @@
   color: #184a3e;
 }
 .mk-pocket strong {
+  line-height: 1.2;
   font-size: 17px;
   letter-spacing: 2px;
   display: block;
 }
 .mk-pocket small {
   display: block;
+  line-height: 1.5;
   font-size: 6px;
   color: #d9e8d3;
-  margin-top: 6px;
+  margin: 0;
 }
 .mk-floating-balance {
   position: absolute;
@@ -740,7 +747,7 @@
   }
   .mk-pocket {
     width: 110px;
-    height: 155px;
+    height: auto;
     right: auto;
   }
   .mk-use > div > span {
@@ -839,7 +846,7 @@
   .mk-pocket {
     top: 13px;
     width: 105px;
-    height: 143px;
+    height: auto;
     padding: 15px;
     right: auto;
     left: 12px;
@@ -847,7 +854,7 @@
   .mk-pocket-chip {
     width: 32px;
     height: 30px;
-    margin: 12px 0 10px;
+    margin: 0;
   }
   .mk-pocket strong {
     font-size: 14px;
