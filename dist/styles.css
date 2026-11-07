@@ -1928,3 +1928,101 @@ dialog::backdrop {
     font-size: 16px;
   }
 }
+
+.nav-label-mobile {
+  display: none;
+}
+#transaction-form .date-control {
+  position: relative;
+  display: block;
+  min-width: 0;
+  height: 46px;
+}
+#transaction-form .date-value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  height: 46px;
+  padding: 0 12px;
+  border: 1px solid #dfe5d8;
+  border-radius: 8px;
+  background: #fdfefa;
+  font-size: 12px;
+  line-height: 1.4;
+}
+#transaction-form .date-value svg {
+  width: 18px;
+  height: 18px;
+  color: var(--muted);
+}
+#transaction-form .date-control input[type="date"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 46px;
+  min-height: 0;
+  max-height: 46px;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+#transaction-form .date-control:focus-within {
+  outline: 2px solid #7e9d66;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+@media (max-width: 800px) {
+  .sidebar {
+    padding: 8px 10px;
+  }
+  .sidebar nav {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 4px;
+    align-items: stretch;
+  }
+  .sidebar .nav-item {
+    min-width: 0;
+    height: 60px;
+    padding: 9px 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 10px;
+    line-height: 14px;
+    text-align: center;
+  }
+  .sidebar .nav-item svg {
+    width: 18px;
+    height: 18px;
+  }
+  .nav-label-full {
+    display: none;
+  }
+  .nav-label-mobile {
+    display: block;
+    white-space: nowrap;
+  }
+  .topbar {
+    height: 56px;
+    padding: 0 18px;
+  }
+  .topbar-right > span {
+    display: none;
+  }
+  .topbar-right .icon-btn {
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (max-width: 480px) {
+  #transaction-form .date-value {
+    font-size: 16px;
+  }
+}

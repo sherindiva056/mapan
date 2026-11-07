@@ -293,7 +293,7 @@ function shell() {
   const name = demo
     ? "Nadia"
     : user?.user_metadata?.name || user?.email?.split("@")[0] || "Teman MAPAN";
-  app.innerHTML = `<div class="shell"><aside class="sidebar">${brand()}<span class="sidebar-label">RUANG KEUANGANMU</span><nav>${navs.map(([id, i, t]) => `<a class="nav-item ${page === id ? "active" : ""}" href="#${id}" ${page === id ? 'aria-current="page"' : ""}>${icon(i)}${t}</a>`).join("")}</nav><div class="sidebar-note">${icon("leaf")}<strong>Pelan-pelan, jadi mapan.</strong>Keuangan yang sehat dimulai dari kebiasaan kecil yang konsisten.<a href="#edukasi" class="link-btn" style="margin-top:13px">Belajar sebentar ${icon("arrow")}</a></div><div class="account"><span class="avatar">${escape(name.slice(0, 1).toUpperCase())}</span><span class="account-info"><strong>${escape(name)}</strong><small>${demo ? "Akun contoh" : "Akun pribadi"}</small></span><button class="icon-btn" data-logout aria-label="${demo ? "Keluar dari contoh" : "Keluar akun"}">${icon("logout")}</button></div></aside><div><header class="topbar"><div class="breadcrumb">Ruang keuangan <span>/ &nbsp;${navs.find((n) => n[0] === page)?.[2]}</span></div><div class="mobile-brand">${brand()}</div><div class="topbar-right"><span class="live-label"><i class="live-dot"></i>${demo ? "Mode contoh" : "Tersimpan online"}</span><span>${new Intl.DateTimeFormat("id-ID", { day: "numeric", month: "short", year: "numeric" }).format(new Date())}</span><button class="icon-btn" data-logout aria-label="Keluar">${icon("logout")}</button></div></header><main class="main-content">${demo ? '<div class="demo-banner"><span>Ini data contoh. Jelajahi dulu, lalu mulai catatanmu sendiri.</span><button data-start>Buat akun →</button></div>' : ""}<div id="page"></div><div class="app-footer"><span>MAPAN · Mahasiswa Paham Keuangan</span><button class="link-btn" data-privacy style="font-size:9px">Privasi & data</button></div></main></div></div>`;
+  app.innerHTML = `<div class="shell"><aside class="sidebar">${brand()}<span class="sidebar-label">RUANG KEUANGANMU</span><nav>${navs.map(([id, i, t]) => `<a class="nav-item ${page === id ? "active" : ""}" href="#${id}" ${page === id ? 'aria-current="page"' : ""}>${icon(i)}<span class="nav-label-full">${t}</span><span class="nav-label-mobile">${id === "laporan" ? "Laporan" : id === "edukasi" ? "Belajar" : t}</span></a>`).join("")}</nav><div class="sidebar-note">${icon("leaf")}<strong>Pelan-pelan, jadi mapan.</strong>Keuangan yang sehat dimulai dari kebiasaan kecil yang konsisten.<a href="#edukasi" class="link-btn" style="margin-top:13px">Belajar sebentar ${icon("arrow")}</a></div><div class="account"><span class="avatar">${escape(name.slice(0, 1).toUpperCase())}</span><span class="account-info"><strong>${escape(name)}</strong><small>${demo ? "Akun contoh" : "Akun pribadi"}</small></span><button class="icon-btn" data-logout aria-label="${demo ? "Keluar dari contoh" : "Keluar akun"}">${icon("logout")}</button></div></aside><div><header class="topbar"><div class="breadcrumb">Ruang keuangan <span>/ &nbsp;${navs.find((n) => n[0] === page)?.[2]}</span></div><div class="mobile-brand">${brand()}</div><div class="topbar-right"><span class="live-label"><i class="live-dot"></i>${demo ? "Mode contoh" : "Tersimpan online"}</span><span>${new Intl.DateTimeFormat("id-ID", { day: "numeric", month: "short", year: "numeric" }).format(new Date())}</span><button class="icon-btn" data-logout aria-label="Keluar">${icon("logout")}</button></div></header><main class="main-content">${demo ? '<div class="demo-banner"><span>Ini data contoh. Jelajahi dulu, lalu mulai catatanmu sendiri.</span><button data-start>Buat akun →</button></div>' : ""}<div id="page"></div><div class="app-footer"><span>MAPAN · Mahasiswa Paham Keuangan</span><button class="link-btn" data-privacy style="font-size:9px">Privasi & data</button></div></main></div></div>`;
   renderPage(name);
   bindCommon();
   document.querySelectorAll("[data-logout]").forEach(
@@ -536,9 +536,15 @@ function transactionModal(existing = {}, notice = "") {
       existing.id ? "Ubah transaksi" : "Catat transaksi",
       notice || "Satu catatan kecil untuk keuangan yang lebih terarah.",
     ) +
-      `<form id="transaction-form"><div class="type-toggle"><label><input type="radio" name="type" value="expense" ${existing.type !== "income" ? "checked" : ""}>Pengeluaran</label><label><input type="radio" name="type" value="income" ${existing.type === "income" ? "checked" : ""}>Pemasukan</label></div><label class="form-field">Nominal (Rp)<input name="amount" type="number" min="1" max="1000000000" step="1" required inputmode="numeric" placeholder="0" value="${existing.amount || ""}"></label><label class="form-field">Keterangan<input name="description" required maxlength="100" placeholder="Misal: makan siang di kantin" value="${escape(existing.description || "")}"></label><div class="form-row"><label class="form-field">Kategori<select name="category">${categories.map((c) => `<option ${c === existing.category ? "selected" : ""}>${c}</option>`).join("")}</select></label><label class="form-field">Tanggal<input name="date" type="date" required max="9999-12-31" value="${existing.date || today()}"></label></div><div class="form-error" role="alert"></div><div class="modal-actions"><button type="button" class="btn secondary" id="cancel-tx">Batal</button><button type="submit" class="btn">Simpan transaksi</button></div></form>`,
+      `<form id="transaction-form"><div class="type-toggle"><label><input type="radio" name="type" value="expense" ${existing.type !== "income" ? "checked" : ""}>Pengeluaran</label><label><input type="radio" name="type" value="income" ${existing.type === "income" ? "checked" : ""}>Pemasukan</label></div><label class="form-field">Nominal (Rp)<input name="amount" type="number" min="1" max="1000000000" step="1" required inputmode="numeric" placeholder="0" value="${existing.amount || ""}"></label><label class="form-field">Keterangan<input name="description" required maxlength="100" placeholder="Misal: makan siang di kantin" value="${escape(existing.description || "")}"></label><div class="form-row"><label class="form-field">Kategori<select name="category">${categories.map((c) => `<option ${c === existing.category ? "selected" : ""}>${c}</option>`).join("")}</select></label><label class="form-field">Tanggal<span class="date-control"><span class="date-value" aria-hidden="true"><span id="transaction-date-label">${displayTransactionDate(existing.date || today())}</span>${icon("calendar")}</span><input name="date" type="date" required max="9999-12-31" value="${existing.date || today()}"></span></label></div><div class="form-error" role="alert"></div><div class="modal-actions"><button type="button" class="btn secondary" id="cancel-tx">Batal</button><button type="submit" class="btn">Simpan transaksi</button></div></form>`,
   );
   document.querySelector("#cancel-tx").onclick = () => modal.close();
+  document
+    .querySelector("#transaction-form input[name=date]")
+    .addEventListener("input", (event) => {
+      document.querySelector("#transaction-date-label").textContent =
+        displayTransactionDate(event.target.value);
+    });
   document.querySelector("#transaction-form").onsubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget,
@@ -966,3 +972,12 @@ async function init() {
   }
 }
 init();
+
+function displayTransactionDate(value) {
+  if (!value || Number.isNaN(Date.parse(value))) return "Pilih tanggal";
+  return new Intl.DateTimeFormat("id-ID", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(value + "T12:00:00"));
+}
